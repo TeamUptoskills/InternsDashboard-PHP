@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Tasks</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Navbar styling */
+        .navbar {
+            background-color: #007bff;
+            height: 70px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Logo on the left */
+        .navbar-brand {
+            font-size: 1.5rem;
+            color: #fff;
+            transition: transform 0.3s ease;
+            animation: fadeInLeft 1s ease forwards;
+        }
+
+        /* Navbar items on the right */
+        .navbar-nav {
+            margin-left: auto;
+            animation: fadeInRight 1s ease forwards;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        /* Task section styling */
+        .task-list {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile responsive styling */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://uptoskills.com/wp-content/uploads/2023/04/hd-logo-iguru.png" alt="UptoSkills Logo" style="height: 40px;">
+        </a>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Home</a> <!-- Link to Dashboard page -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-headset"></i> Support</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Task lists for each department -->
+<div class="container mt-4">
+    <div id="marketing-tasks" class="task-list">
+        <h2>Marketing Tasks</h2>
+        <ul>
+            <li>Social media campaign planning</li>
+            <li>Content creation for blog</li>
+            <li>SEO analysis report</li>
+        </ul>
+    </div>
+
+    <div id="development-tasks" class="task-list">
+        <h2>Development Tasks</h2>
+        <ul>
+            <li>Build the company website</li>
+            <li>Fix bugs in the task management module</li>
+            <li>Implement new API features</li>
+        </ul>
+    </div>
+
+    <div id="hr-tasks" class="task-list">
+        <h2>HR Tasks</h2>
+        <ul>
+            <li>Review internship applications</li>
+            <li>Organize team-building events</li>
+            <li>Prepare onboarding materials</li>
+        </ul>
+    </div>
+
+    <!-- Separate Finance and Operations -->
+    <div id="finance-tasks" class="task-list">
+        <h2>Finance Tasks</h2>
+        <ul>
+            <li>Prepare monthly financial reports</li>
+            <li>Assist in budgeting and forecasting</li>
+            <li>Monitor financial transactions</li>
+        </ul>
+    </div>
+
+    <div id="operations-tasks" class="task-list">
+        <h2>Operations Tasks</h2>
+        <ul>
+            <li>Analyze operational efficiency</li>
+            <li>Manage office supplies and equipment</li>
+            <li>Coordinate with external vendors</li>
+        </ul>
+    </div>
+
+    <!-- Separate Sales and Customer Service -->
+    <div id="sales-tasks" class="task-list">
+        <h2>Sales Tasks</h2>
+        <ul>
+            <li>Conduct sales follow-ups</li>
+            <li>Prepare sales presentations</li>
+            <li>Manage customer leads</li>
+        </ul>
+    </div>
+
+    <div id="customer-service-tasks" class="task-list">
+        <h2>Customer Service Tasks</h2>
+        <ul>
+            <li>Manage customer service tickets</li>
+            <li>Provide after-sales support</li>
+            <li>Respond to customer inquiries</li>
+        </ul>
+    </div>
+
+    <a href="dashboard.html" class="btn btn-primary mt-4">Back to Dashboard</a>
+</div>
+
+<!-- JavaScript to handle task display -->
+<script>
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    function showTasks(department) {
+        // Hide all task lists
+        document.querySelectorAll('.task-list').forEach(function(list) {
+            list.style.display = 'none';
+        });
+
+        // Show the selected department's tasks
+        const selectedTaskList = document.getElementById(department + '-tasks');
+        if (selectedTaskList) {
+            selectedTaskList.style.display = 'block';
+        }
+    }
+
+    // Automatically show tasks based on the department from the URL
+    const department = getQueryParameter('department');
+    if (department) {
+        showTasks(department);
+    }
+</script>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

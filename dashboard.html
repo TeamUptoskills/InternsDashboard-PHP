@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://uptoskills.com/wp-content/uploads/2023/04/hd-logo-iguru.png" style="width: auto; height: auto;">
+    <title>Intern Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode {
+            background-color: #343a40;
+            color: #f4f7fc;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: #343a40;
+            overflow-x: hidden;
+            transition: width 0.5s ease;
+            padding-top: 30px;
+        }
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ddd;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .sidebar a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .closebtn {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            font-size: 36px;
+            color: white;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #007bff, #6610f2);
+            height: 70px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: background-color 0.3s ease;
+        }
+        .content {
+            transition: margin-left 0.5s ease;
+            padding: 30px;
+        }
+        .departments-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .department-card {
+            width: 180px;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .department-card:hover {
+            transform: translateY(-5px);
+        }
+        .department-icon {
+            font-size: 60px;
+            color: #007bff;
+        }
+        .modal-body p {
+            color: #333;
+        }
+        .dark-mode .modal-body p {
+            color: #f4f7fc;
+        }
+        
+        .responsive-logo {
+            max-width: 100%;
+            height: auto;
+            max-height: 50px;
+        }
+        @media (max-width: 768px) {
+            .responsive-logo {
+                max-height: 40px;
+            }
+        }
+        @media (max-width: 480px) {
+            .responsive-logo {
+                max-height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="team.html"><i class="fas fa-tasks"></i> Teams</a>
+    <a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a>
+    <a href="learning_resources.html"><i class="fas fa-user-graduate"></i> Learning Resources</a>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <span style="font-size:30px; cursor:pointer; color:white;" onclick="openNav()">&#9776;</span>
+        <a class="navbar-brand ml-3" href="#">
+            <img src="https://uptoskills.com/wp-content/uploads/2023/04/hd-logo-iguru.png" alt="UptoSkills" class="responsive-logo">
+        </a>
+
+        <!-- Navbar toggler for mobile -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible menu -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Dark Mode Toggle -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="darkModeToggle">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </a>
+                </li>
+
+                <!-- Support Modal Trigger -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#supportModal">
+                        <i class="fas fa-headset"></i> Support
+                    </a>
+                </li>
+
+                <!-- Profile Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i> My Profile
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user-edit"></i> Edit Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div id="main" class="content">
+    <div class="departments-container">
+        <div class="department-card" onclick="redirectToTasks('marketing')">
+            <i class="fas fa-bullhorn department-icon"></i>
+            <h5>Marketing</h5>
+        </div>
+        <div class="department-card" onclick="redirectToTasks('development')">
+            <i class="fas fa-code department-icon"></i>
+            <h5>Development</h5>
+        </div>
+        <div class="department-card" onclick="redirectToTasks('hr')">
+            <i class="fas fa-users department-icon"></i>
+            <h5>HR</h5>
+        </div>
+        <div class="department-card" onclick="redirectToTasks('finance')">
+            <i class="fas fa-chart-line department-icon"></i>
+            <h5>Finance</h5>
+        </div>
+        <div class="department-card" onclick="redirectToTasks('operations')">
+            <i class="fas fa-cogs department-icon"></i>
+            <h5>Operations</h5>
+        </div>
+        <div class="department-card" onclick="redirectToTasks('sales')">
+            <i class="fas fa-shopping-bag department-icon"></i>
+            <h5>Sales</h5>
+        </div>
+    </div>
+</div>
+
+<!-- Support Modal -->
+<div class="modal fade" id="supportModal" tabindex="-1" role="dialog" aria-labelledby="supportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="supportModalLabel">Support Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Company Name:</strong> UptoSkills</p>
+                <p><strong>Email:</strong> support@uptoskills.com</p>
+                <p><strong>Phone:</strong> +123-456-7890</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // Dark Mode Toggle Function
+    document.getElementById("darkModeToggle").addEventListener("click", function() {
+        document.body.classList.toggle("dark-mode");
+    });
+
+    // Sidebar open/close function
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+    // Redirect function for tasks
+    function redirectToTasks(department) {
+        window.location.href = `intern_tasks.html?department=${department}`;
+    }
+</script>
+</body>
+</html>
